@@ -146,6 +146,10 @@ public class URL implements Serializable {
         return (port == -1)? defaultPort() : port;
     }
 
+    public int originalPort() {
+        return port;
+    }
+
     private static int defaultPort(final String scheme) {
         String defaultPort = URLUtils.getDefaultPortForScheme(scheme);
         if (defaultPort == null) {
