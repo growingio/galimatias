@@ -75,7 +75,7 @@ public class URL implements Serializable {
             this.password = password;
             this.host = host;
             //XXX: This is already done in some cases by the URLParser
-            this.port = (port == defaultPort(this.scheme))? -1 : port;
+            this.port = port;
             this.path = path;
         } else {
             this.username = "";
@@ -522,7 +522,7 @@ public class URL implements Serializable {
         if (newPort == this.port) {
             return this;
         }
-        if (this.port == -1 && newPort == defaultPort()) {
+        if (this.port == -1) {
             return this;
         }
         return new URL(this.scheme, this.schemeData, this.username, this.password, this.host, newPort, this.path, this.query, this.fragment, true);

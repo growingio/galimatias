@@ -423,7 +423,7 @@ final class URLParser {
 
                     if (isEOF) {
                         host = (base == null)? null : base.host();
-                        port = (base == null || base.port() == base.defaultPort())? -1 : base.port();
+                        port = (base == null)? -1 : base.port();
                         pathSegments = (base == null)? null : base.pathSegments();
                         query = (base == null || base.query() == null)? null : new StringBuilder(base.query());
                     } else if (c == '/' || c == '\\') {
@@ -433,13 +433,13 @@ final class URLParser {
                         state = ParseURLState.RELATIVE_SLASH;
                     } else if (c == '?') {
                         host = (base == null)? null : base.host();
-                        port = (base == null || base.port() == base.defaultPort())? -1 : base.port();
+                        port = (base == null)? -1 : base.port();
                         pathSegments = (base == null)? null : base.pathSegments();
                         query = new StringBuilder();
                         state = ParseURLState.QUERY;
                     } else if (c == '#') {
                         host = (base == null)? null : base.host();
-                        port = (base == null || base.port() == base.defaultPort())? -1 : base.port();
+                        port = (base == null)? -1 : base.port();
                         pathSegments = (base == null)? null : base.pathSegments();
                         query = (base == null || base.query() == null)? null : new StringBuilder(base.query());
                         fragment = new StringBuilder();
@@ -454,7 +454,7 @@ final class URLParser {
                                 ) {
 
                             host = (base == null)? null : base.host();
-                            port = (base == null || base.port() == base.defaultPort())? -1 : base.port();
+                            port = (base == null)? -1 : base.port();
                             pathSegments = (base == null)? new ArrayList<String>() : base.pathSegments();
                             // Pop path
                             if (!pathSegments.isEmpty()) {
@@ -480,7 +480,7 @@ final class URLParser {
                     } else {
                         if (!"file".equals(scheme)) {
                             host = (base == null)? null : base.host();
-                            port = (base == null || base.port() == base.defaultPort())? -1 : base.port();
+                            port = (base == null)? -1 : base.port();
                         }
                         state = ParseURLState.RELATIVE_PATH;
                         idx--;
@@ -653,9 +653,9 @@ final class URLParser {
                             buffer.deleteCharAt(0);
                         }
                         //XXX: This is redundant with URL constructor
-                        if (buffer.toString().equals(getDefaultPortForScheme(scheme))) {
-                            buffer.setLength(0);
-                        }
+//                        if (buffer.toString().equals(getDefaultPortForScheme(scheme))) {
+//                            buffer.setLength(0);
+//                        }
                         if (buffer.length() == 0) {
                             port = -1;
                         } else {
